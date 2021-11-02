@@ -20,4 +20,4 @@ USER gandalf
 WORKDIR /home/gandalf
 COPY --from=builder /home/legolas/app/target/laboratorio-*.jar /home/gandalf/app/laboratorio.jar
 EXPOSE 8080
-CMD ["sh", "-c", "java -D", "-Dspring.data.mongodb.host=$MONGO_HOST -Dspring.data.mongodb.port=$MONGO_PORT -Dspring.data.mongodb.database=$MONGO_DB -Dspring.data.mongodb.username=$MONGO_USERNAME, -Dspring.data.mongodb.password=$MONGO_PASSWORD","-jar","/home/gandalf/app/laboratorio.jar"]
+ENTRYPOINT [ "java", "-D spring.data.mongodb.uri=mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOST}:${MONGO_PORT}/${MONGO_DB}", "-jar", "/home/gandalf/app/laboratorio.jar" ]

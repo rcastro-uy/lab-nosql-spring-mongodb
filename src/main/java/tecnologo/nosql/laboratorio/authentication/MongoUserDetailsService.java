@@ -7,8 +7,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import tecnologo.nosql.laboratorio.usuario.Usuario;
 import tecnologo.nosql.laboratorio.usuario.UsuarioRepository;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public class MongoUserDetailsService implements UserDetailsService {
     @Autowired
     private UsuarioRepository repository;

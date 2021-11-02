@@ -28,7 +28,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private AuthenticationEntry authenticationEntry;
 
     @Autowired
-    MongoUserDetailsService userDetailsService;
+    private UserDetailsService userDetailsService;
+
+    @Autowired
+    private TokenHelper tokenHelper;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -51,23 +54,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-/*        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().exceptionHandling()
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().exceptionHandling()
                 .authenticationEntryPoint(authenticationEntry).and()
-                .authorizeRequests((request) -> request.antMatchers("/api/v1/auth/login", "/v3/api-docs.yaml", "/v3/api-docs").permitAll()
-                        .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                        .antMatchers("/api/v1/cliente/eliminarCuenta").hasRole("CLIENTE")
-                        .anyRequest().authenticated())
-                .addFilterBefore(new AuthenticationFilter(customService, tokenHelper),
-                        UsernamePasswordAuthenticationFilter.class);
-
-        http.csrf().disable();
-        http.cors().and().headers().frameOptions().disable();*/
-        http
-                .csrf().disable()
                 .authorizeRequests((request) -> request
                         .antMatchers("/api/v1/auth/login", "/api/v1/usuario/test").permitAll()
                         .anyRequest().authenticated())
-                .httpBasic()
-                .and().sessionManagement().disable();
+                .addFilterBefore(new AuthenticationFilter(userDetailsService, tokenHelper),
+                        UsernamePasswordAuthenticationFilter.class);
+
+        http.csrf().disable();
+        http.cors().and().headers().frameOptions().disable();
     }
 }

@@ -18,7 +18,7 @@ public class UsuarioConfiguration {
     CommandLineRunner commandLineRunnerUsuario(UsuarioRepository usuarioRepository) {
         return args ->{
             Usuario user =  new Usuario("usuario@gmail.com","Usuario", "Prueba",
-                    passwordEncoder.encode("usuario123"), "Rol1");
+                    passwordEncoder.encode("usuario123"));
             usuarioRepository.saveAll(List.of(user));
             //Alta inicial de Usuario en la DB
         };

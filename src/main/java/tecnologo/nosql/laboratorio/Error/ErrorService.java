@@ -15,8 +15,22 @@ public class ErrorService {
         this.errorRepository = errorRepository;
     }
 
+    // Obtener códigos de error - Se invoca la operación sin parámetros y se devuelve una
+    // lista con los códigos de error del sistema junto con una descripción de los mismos.
     public List<Error> listarErrores(){
-        //aca se retornan los errores
+        List<Error> errors = errorRepository.findAll();
+        if (errors != null ) {
+            return errors;
+        }
         return null;
     }
+
+    public Error getError(int id) {
+        Error error = errorRepository.findById(id);
+        if (error != null) {
+            return error;
+        }
+        return null;
+    }
+
 }

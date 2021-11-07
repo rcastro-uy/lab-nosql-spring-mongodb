@@ -36,23 +36,24 @@ public class UsuarioController {
 
     @PostMapping(path = "/altaUsuario")//CREAR Usuario
     public ResponseEntity<?> crearUsuario(@RequestBody String data) {
-        try {
-            JsonObject jsonUsuario = new Gson().fromJson(data, JsonObject.class);
+        JsonObject jsonUsuario = new Gson().fromJson(data, JsonObject.class);
 
-            usuarioService.crearUsuario(
-                    new String(Base64.getDecoder().decode(jsonUsuario.get("correo").getAsString())),
-                    jsonUsuario.get("nombre").getAsString(),
-                    jsonUsuario.get("apellido").getAsString(),
-                    new String(Base64.getDecoder().decode(jsonUsuario.get("password").getAsString()))
-            );
+        CodigoError codigoError = usuarioService.crearUsuario(
+                new String(Base64.getDecoder().decode(jsonUsuario.get("correo").getAsString())),
+                jsonUsuario.get("nombre").getAsString(),
+                jsonUsuario.get("apellido").getAsString(),
+                new String(Base64.getDecoder().decode(jsonUsuario.get("password").getAsString()))
+        );
 
+        if (codigoError == null){
             return ResponseEntity.status(HttpStatus.CREATED).build();
-        } catch (CodigoError e) {
-            return ResponseEntity.status(e.getId()).body(e.getInfo());
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("" + codigoError.getId() + " - " + codigoError.getInfo());
         }
+
     }
 
-    @PutMapping(path = "/agregarRoles")
+    @PostMapping(path = "/agregarRoles")
     public ResponseEntity<?> agregarRoles(@RequestBody String data) {
         JsonObject jsonRoles = new Gson().fromJson(data, JsonObject.class);
         JsonArray jsonArrayRoles = jsonRoles.get("roles").getAsJsonArray();
@@ -61,15 +62,17 @@ public class UsuarioController {
         for (JsonElement r: jsonArrayRoles) {
             listaRoles.add(r.getAsString());
         }
-        try{
-            usuarioService.agregarRoles(
-                    new String(Base64.getDecoder().decode(jsonRoles.get("correo").getAsString())),
-                    new String(Base64.getDecoder().decode(jsonRoles.get("password").getAsString())),
-                    listaRoles
-            );
+        System.out.println("Agregando roles");
+        CodigoError codigoError = usuarioService.agregarRoles(
+                new String(Base64.getDecoder().decode(jsonRoles.get("correo").getAsString())),
+                new String(Base64.getDecoder().decode(jsonRoles.get("password").getAsString())),
+                listaRoles
+        );
+        System.out.println("Codigo Error vale: " + codigoError);
+        if (codigoError == null){
             return ResponseEntity.status(HttpStatus.OK).build();
-        }catch(CodigoError e){
-            return ResponseEntity.status(e.getId()).body(e.getInfo());
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("" + codigoError.getId() + " - " + codigoError.getInfo());
         }
     }
 
@@ -82,15 +85,15 @@ public class UsuarioController {
         for (JsonElement r: jsonArrayRoles) {
             listaRoles.add(r.getAsString());
         }
-        try{
-            usuarioService.agregarRoles(
-                    new String(Base64.getDecoder().decode(jsonRoles.get("correo").getAsString())),
-                    new String(Base64.getDecoder().decode(jsonRoles.get("password").getAsString())),
-                    listaRoles
-            );
+        CodigoError codigoError = usuarioService.eliminarRoles(
+                new String(Base64.getDecoder().decode(jsonRoles.get("correo").getAsString())),
+                new String(Base64.getDecoder().decode(jsonRoles.get("password").getAsString())),
+                listaRoles
+        );
+        if (codigoError == null){
             return ResponseEntity.status(HttpStatus.OK).build();
-        }catch(CodigoError e){
-            return ResponseEntity.status(e.getId()).body(e.getInfo());
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("" + codigoError.getId() + " - " + codigoError.getInfo());
         }
     }
 }

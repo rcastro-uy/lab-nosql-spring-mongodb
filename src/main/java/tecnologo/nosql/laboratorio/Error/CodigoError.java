@@ -2,11 +2,12 @@ package tecnologo.nosql.laboratorio.Error;
 
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
 @Data
-public class CodigoError extends Exception{
+public class CodigoError{
 
     //id
     public int id;

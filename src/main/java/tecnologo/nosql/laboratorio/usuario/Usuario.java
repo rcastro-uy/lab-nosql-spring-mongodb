@@ -2,8 +2,6 @@ package tecnologo.nosql.laboratorio.usuario;
 
 import lombok.Builder;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,8 +10,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-@Setter
-@Getter
 @Data
 @Builder
 public class Usuario implements UserDetails {
@@ -23,7 +19,7 @@ public class Usuario implements UserDetails {
     private String nombre;
     private String apellido;
     private String contrasenia;
-    private List<String> rol = new ArrayList<String>();
+    private List<String> rol = new ArrayList<>();
 
     public Usuario() {
     }
@@ -35,43 +31,11 @@ public class Usuario implements UserDetails {
         this.contrasenia = contrasenia;
     }
 
-    public String getCorreo() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) {
+    public Usuario(String correo, String nombre, String apellido, String contrasenia, List<String> rol) {
         this.correo = correo;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public String getApellido() {
-        return apellido;
-    }
-
-    public void setApellido(String apellido) {
         this.apellido = apellido;
-    }
-
-    public String getContrasenia() {
-        return contrasenia;
-    }
-
-    public void setContrasenia(String contrasenia) {
         this.contrasenia = contrasenia;
-    }
-
-    public List<String> getRol() {
-        return rol;
-    }
-
-    public void setRol(List<String> rol) {
         this.rol = rol;
     }
 
@@ -80,11 +44,7 @@ public class Usuario implements UserDetails {
     }
 
     public void deleteRol(String rol) {
-        for (String r: this.rol) {
-            if(r.equals(rol)){
-                this.rol.remove(r);
-            }
-        }
+        this.rol.removeIf(r -> r.equals(rol));
     }
 
     @Override

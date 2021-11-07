@@ -40,7 +40,6 @@ public class AuthenticationController {
         String jwtToken=tokenHelper.generateToken(usuario.getUsername());
         System.out.println("el token es: " + jwtToken);
 
-        //falta generar el refreshToken y agregarselo a la response
         AuthenticationResponse response=new AuthenticationResponse();
         response.setToken(jwtToken);
 

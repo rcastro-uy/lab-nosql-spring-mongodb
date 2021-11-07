@@ -1,0 +1,355 @@
+{
+	"info": {
+		"_postman_id": "a9febc59-eece-431b-93d3-891f664f3bd6",
+		"name": "Pruebas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"dXN1YXJpb0BnbWFpbC5jb20=\",\n    \"password\": \"dXN1YXJpbzEyMw==\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/auth/login",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login Incorrecto",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"dXN1YXJpb0BnbWFpbC5jb28=\",\n    \"password\": \"dXN1YXJpbzEyMw==\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/auth/login",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login Valentin",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"dmFsZW50aW5AZ21haWwuY29t\",\n    \"password\": \"cGFzczEyMw==\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/auth/login",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Seguro",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJGb29kTW9ua3MtQXBwIiwic3ViIjoidXN1YXJpb0BnbWFpbC5jb20iLCJpYXQiOjE2MzYyMzA5OTAsImV4cCI6MTYzNjIzNDU5MH0.G1DTOF_9-IanIw5BQ5DJod_56C32RDppcH9EhleLRW1qVMJJbqhmfKbtOKcw3b2FiJxtraonGXSVZUTbYu5eWg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/usuario/secured-test/",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"usuario",
+						"secured-test",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Sin Seguridad",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/usuario/test",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"usuario",
+						"test"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear Usuario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"correo\": \"dmFsZW50aW5AZ21haWwuY29t\",\n    \"nombre\": \"Valentin\",\n    \"apellido\": \"Vasconcellos\",\n    \"password\": \"cGFzczEyMw==\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/usuario/altaUsuario",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"usuario",
+						"altaUsuario"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear Usuario Repetido",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"correo\": \"dmFsZW50aW5AZ21haWwuY29t\",\n    \"nombre\": \"Valentin\",\n    \"apellido\": \"Vasconcellos\",\n    \"password\": \"cGFzczEyMw==\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/usuario/altaUsuario",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"usuario",
+						"altaUsuario"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Agregar Roles",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"correo\": \"dmFsZW50aW5AZ21haWwuY29t\",\n    \"password\": \"cGFzczEyMw==\",\n    \"roles\": [\n        \"Rol1\",\n        \"Rol2\"\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/usuario/agregarRoles",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"usuario",
+						"agregarRoles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Agregar Roles Usuario No Existe",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"correo\": \"dmFsZW50aW5AZ21haWwuY29\",\n    \"password\": \"cGFzczEyMw==\",\n    \"roles\": [\n        \"Rol1\",\n        \"Rol2\"\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/usuario/agregarRoles",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"usuario",
+						"agregarRoles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Agregar Roles Error Pass",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"correo\": \"dmFsZW50aW5AZ21haWwuY29t\",\n    \"password\": \"cGFzczEyMzQ=\",\n    \"roles\": [\n        \"Rol1\",\n        \"Rol2\"\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/usuario/agregarRoles",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"usuario",
+						"agregarRoles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar Roles",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"correo\": \"dmFsZW50aW5AZ21haWwuY29t\",\n    \"password\": \"cGFzczEyMw==\",\n    \"roles\": [\n        \"Rol1\"\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/usuario/eliminarRoles",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"usuario",
+						"eliminarRoles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener Códigos de Error",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/error/getErrores",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"error",
+						"getErrores"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "HOST",
+			"value": "http://localhost:8080/api/v1"
+		}
+	]
+}

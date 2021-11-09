@@ -24,16 +24,6 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
-    @GetMapping("/test")
-    public ResponseEntity<?> testApi() {
-        return ResponseEntity.ok("Test exitoso");
-    }
-
-    @GetMapping("/secured-test")
-    public ResponseEntity<?> testSecuredApi() {
-        return ResponseEntity.ok("Acceso autorizado");
-    }
-
     @PostMapping(path = "/altaUsuario")//CREAR Usuario
     public ResponseEntity<?> crearUsuario(@RequestBody String data) {
         JsonObject jsonUsuario = new Gson().fromJson(data, JsonObject.class);

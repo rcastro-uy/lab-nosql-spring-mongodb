@@ -12,8 +12,6 @@ services:
     hostname: backend
     depends_on:
       - mongodb
-    # networks:
-    #   - nosql
     networks:
       - nosql
     restart: always

@@ -29,6 +29,7 @@ services:
     networks:
       - nosql
     volumes:
+      - ./data:/data/db
       - ./data/init-mongo.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
     restart: always
 
